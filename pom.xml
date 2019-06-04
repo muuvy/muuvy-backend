@@ -29,7 +29,7 @@
   </dependencyManagement>
 
   <build>
-    <finalName>demo</finalName>
+    <finalName>helloWorld</finalName>
     <plugins>
       <plugin>
         <groupId>io.thorntail</groupId>
