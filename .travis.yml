@@ -1,11 +1,10 @@
 language: java
 jdk:
 - openjdk8
-dist: trusty
 addons:
   sonarcloud:
     organization: muuvy
     token:
       secure: Vm3IPY3vKmsnc/bz0qLp2BcdwuauB0kGgbhBW1GTyBnsB+5Ld7CrkL2phDPOERaMGT2tN/9gWAreho7Q/6p+pUPDsc+bb3eY5Ebigt45rBUKdogQhOey8FwlhgaI0oQ5ho2IImVGfhKBj6BJloHbUeJ83hnoeGLLBh0aybprtl3CzEDNzNy1+1u035QdJbqIV7vXuDHdNPGOvIoL0TqyVwYfUalgtfUMtrfTVj8SQ+m7baUFHWK0rhUsSHVjgjs1H6Y/5VesZogX884e30BhekIx6fiVyG/8hR3Nbbo8/yk3JlA60e3rsLZjnSrYDjIP6cjNUthoH+gNgdfdM2Dheh/cX5OyT+hL9yw9IFk/5LpDwRR4ZSj/szPDMoLNlfoFSGMzsHaDeIvBPWXJFruXKDZlkCBx1t/I5BqaQozfr0D9FjuoHv5P3TRZdoWz4k0wEQSQ7X1sqKAlyO42852v4CLwu09YShxx8RFJSjBGoSFuoB/Y3KJHiDCY4WGpRn/5ysP+ozjtCNRDyo1xzAIrfLI9w+0qQyp5d3fUX7xqVQTDrdzmPTD0IF/6wzgiNJGzR9t217OHh80UQh5cdN6/w6CC/Ncq6p7hkwVnWYqRNpQGKOeKJ7Xvrir1y5Z4uaIAkd/qaageBWDDW5KK4Yl0YPyYYomGPHZxYYbnkHKSgOM=
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=muuvy -Dsonar.login=752af8bc07c4cc68b542c4bb2f0e9cadde3bd14d
