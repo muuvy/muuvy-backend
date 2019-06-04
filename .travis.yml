@@ -1,18 +1,11 @@
 language: java
 jdk:
-  - openjdk8
+- openjdk8
 dist: trusty
-
 addons:
   sonarcloud:
-    organization: "muuvy"
+    organization: muuvy
     token:
-      secure: "EhK2h+zsL1U1gR3/rn2W5D8zaoDc7IpPapB5DaCkOnbYpEBHPBI4Bd8VZdVagXM/7jaVZay3Bbarps527nhGDjZBAybenL+xvU7m9sZiLAbGO2TKkDpO04iCp1JA8OG/DyayX0kI6wZ6f0ZypeniKM7mp8nqazDfsHqQBEAC8sAFfubrKx3YQ+YpDc1fEgQIEPbCUmV3U500FaV9th0cdOZRHJhtGJ/8vC/hpWsvJtCEeZctKPsD/0SLxsk7oLSQL5MPx03bb3WJ96wMlGcl2xnFbTdhJAamW11sWG/qYyyzR2xYJs4m2mZTgBgY7E3UY5awDa8Qp2GmZyD8v9bR8QqxCxXcAgoS8+pPun/LO+eqr2cV3T/KAdEuTFuU7+6Cvz5kVEM4TMD6CUIyEkqx3sDFKDfrgvFzgfliEyeuFuROwfQhhQenreGNsVrbR+uMc2szEn2yubWT8ei7fFZMdLzSmtQ6TxDCQ/bRN0ntahc63Z79lJ/M6WTI6W1iLXIyTxduz+QabvcjktNCrb3zQcywUtENuIKZ9MRlVrOoCwjN6GU2rC/swy3kP/mCbrR8XtsgJMVRmICroVbdx9/PMBgt+uh/vEjh5PVT5Cxg72+UF6qeb0Wi7UbuEsEquMO4JLaIdQ/Q59T2ZiM92V2WEgva47W4+1k4tJlhf9ihWc4=" # encrypted value of your token
+      secure: Vm3IPY3vKmsnc/bz0qLp2BcdwuauB0kGgbhBW1GTyBnsB+5Ld7CrkL2phDPOERaMGT2tN/9gWAreho7Q/6p+pUPDsc+bb3eY5Ebigt45rBUKdogQhOey8FwlhgaI0oQ5ho2IImVGfhKBj6BJloHbUeJ83hnoeGLLBh0aybprtl3CzEDNzNy1+1u035QdJbqIV7vXuDHdNPGOvIoL0TqyVwYfUalgtfUMtrfTVj8SQ+m7baUFHWK0rhUsSHVjgjs1H6Y/5VesZogX884e30BhekIx6fiVyG/8hR3Nbbo8/yk3JlA60e3rsLZjnSrYDjIP6cjNUthoH+gNgdfdM2Dheh/cX5OyT+hL9yw9IFk/5LpDwRR4ZSj/szPDMoLNlfoFSGMzsHaDeIvBPWXJFruXKDZlkCBx1t/I5BqaQozfr0D9FjuoHv5P3TRZdoWz4k0wEQSQ7X1sqKAlyO42852v4CLwu09YShxx8RFJSjBGoSFuoB/Y3KJHiDCY4WGpRn/5ysP+ozjtCNRDyo1xzAIrfLI9w+0qQyp5d3fUX7xqVQTDrdzmPTD0IF/6wzgiNJGzR9t217OHh80UQh5cdN6/w6CC/Ncq6p7hkwVnWYqRNpQGKOeKJ7Xvrir1y5Z4uaIAkd/qaageBWDDW5KK4Yl0YPyYYomGPHZxYYbnkHKSgOM=
 script:
-  # JaCoCo is used to have code coverage, "-Pcoverage" activates the maven profile in the pom.xml
-  - mvn clean verify sonar:sonar -Pcoverage 
-
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.sonar/cache'
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
