@@ -9,4 +9,10 @@ addons:
     token:
       secure: "EhK2h+zsL1U1gR3/rn2W5D8zaoDc7IpPapB5DaCkOnbYpEBHPBI4Bd8VZdVagXM/7jaVZay3Bbarps527nhGDjZBAybenL+xvU7m9sZiLAbGO2TKkDpO04iCp1JA8OG/DyayX0kI6wZ6f0ZypeniKM7mp8nqazDfsHqQBEAC8sAFfubrKx3YQ+YpDc1fEgQIEPbCUmV3U500FaV9th0cdOZRHJhtGJ/8vC/hpWsvJtCEeZctKPsD/0SLxsk7oLSQL5MPx03bb3WJ96wMlGcl2xnFbTdhJAamW11sWG/qYyyzR2xYJs4m2mZTgBgY7E3UY5awDa8Qp2GmZyD8v9bR8QqxCxXcAgoS8+pPun/LO+eqr2cV3T/KAdEuTFuU7+6Cvz5kVEM4TMD6CUIyEkqx3sDFKDfrgvFzgfliEyeuFuROwfQhhQenreGNsVrbR+uMc2szEn2yubWT8ei7fFZMdLzSmtQ6TxDCQ/bRN0ntahc63Z79lJ/M6WTI6W1iLXIyTxduz+QabvcjktNCrb3zQcywUtENuIKZ9MRlVrOoCwjN6GU2rC/swy3kP/mCbrR8XtsgJMVRmICroVbdx9/PMBgt+uh/vEjh5PVT5Cxg72+UF6qeb0Wi7UbuEsEquMO4JLaIdQ/Q59T2ZiM92V2WEgva47W4+1k4tJlhf9ihWc4=" # encrypted value of your token
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  # JaCoCo is used to have code coverage, "-Pcoverage" activates the maven profile in the pom.xml
+  - mvn clean verify sonar:sonar -Pcoverage 
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
