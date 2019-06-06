@@ -15,4 +15,5 @@ public class HelloWorldEndpoint {
 	public Response doGet() {
 		return Response.ok("Hello from Thorntail!").build();
 	}
+
 }
