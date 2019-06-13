@@ -30,3 +30,8 @@ __Config selection__
 |----------------------|--------------------------------------------|----------------------------------------------------------------------------------------|
 | Environment Variable | JAVA_OPTS="-Dthorntail.project.stage=prod" | https://github.com/cloudfoundry/java-buildpack/blob/master/docs/framework-java_opts.md |
 | Start Command | java -jar muuvy-app-backend.jar -Slocal |  |
+
+### REST Client 
+
+* source: https://github.com/eclipse/microprofile-rest-client
+* implementation: https://github.com/thorntail/thorntail/tree/master/fractions/microprofile/microprofile-restclient
