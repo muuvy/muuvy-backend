@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.muuvy.backend</groupId>
     <artifactId>app-backend</artifactId>
@@ -18,6 +19,7 @@
 
     <dependencyManagement>
         <dependencies>
+
             <dependency>
                 <groupId>io.thorntail</groupId>
                 <artifactId>bom-all</artifactId>
@@ -25,32 +27,44 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
             <dependency>
                 <groupId>io.thorntail</groupId>
                 <artifactId>jaxrs</artifactId>
             </dependency>
+
             <!-- Yaml Support: https://docs.thorntail.io/4.0.0-SNAPSHOT/#_configuration -->
             <dependency>
                 <groupId>org.yaml</groupId>
                 <artifactId>snakeyaml</artifactId>
                 <version>1.24</version>
             </dependency>
+
             <!-- Throntail Developer Tools: https://docs.thorntail.io/4.0.0-SNAPSHOT/#devtools -->
             <dependency>
                 <groupId>io.thorntail</groupId>
                 <artifactId>thorntail-devtools</artifactId>
             </dependency>
+            
             <dependency>
                 <groupId>io.thorntail.servers</groupId>
                 <artifactId>web</artifactId>
             </dependency>
+
             <!-- Micro Profiles: https://github.com/thorntail/thorntail-examples/tree/master/microprofile -->
             <dependency>
                 <groupId>io.thorntail</groupId>
                 <artifactId>microprofile</artifactId>
                 <version>${version.thorntail}</version>
             </dependency>
-        </dependencies>
+
+            <!-- REST Client: https://github.com/thorntail/thorntail/tree/master/fractions/microprofile/microprofile-restclient -->
+            <dependency>
+                <groupId>io.thorntail</groupId>
+                <artifactId>microprofile-restclient</artifactId>
+            </dependency>
+
+    </dependencies>
     </dependencyManagement>
 
     <build>
