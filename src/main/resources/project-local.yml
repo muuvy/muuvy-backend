@@ -1,3 +1,22 @@
 thorntail:
   http:
     port: 8080
+  logging:
+    pattern-formatters:
+      DEFAULT:
+        pattern: '%d %-5p [%t] %c: %m%n'
+    console-handlers:
+      CONSOLE:
+        level: INFO
+        named-formatter: DEFAULT
+    periodic-rotating-file-handlers:
+      FILE:
+        level: ERROR
+        file:
+          path: log/error.log
+        named-formatter: DEFAULT
+        suffix: yyyy-MM-dd
+    root-logger:
+      handlers:
+        - CONSOLE
+        - FILE
