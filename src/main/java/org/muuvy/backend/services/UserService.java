@@ -1,13 +1,15 @@
 package org.muuvy.backend.services;
 
 import org.muuvy.backend.dto.UserDto;
+import org.muuvy.backend.models.UserModel;
 
-import javax.inject.Inject;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class UserService {
 
-    @Inject
     UserDto userDto;
+    UserModel userModel;
 
     public UserDto createUser(UserDto user){
 
@@ -26,9 +28,4 @@ public class UserService {
 
         return  userDto;
     }
-
-
-
-
-
 }
