@@ -1,4 +1,4 @@
-package org.muuvy.backend.hello;
+package org.muuvy.backend.controllers;
 
 import org.muuvy.backend.dto.FavouriteDto;
 import org.muuvy.backend.services.FavouriteService;
@@ -33,6 +33,6 @@ public class FavouriteController {
     @DELETE
     public Response deleteFavourite(@QueryParam("movieId") String movieId){
        favouriteService.deleteFavouriteId(movieId);
-        return Response.ok().build();
+        return Response.ok(String.format("deleted %s", movieId)).build();
     }
 }

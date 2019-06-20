@@ -1,4 +1,4 @@
-package org.muuvy.backend.hello;
+package org.muuvy.backend.controllers;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

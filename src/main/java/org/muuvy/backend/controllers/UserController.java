@@ -1,4 +1,4 @@
-package org.muuvy.backend.hello;
+package org.muuvy.backend.controllers;
 
 
 import org.muuvy.backend.dto.UserDto;
