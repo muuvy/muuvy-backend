@@ -14,8 +14,8 @@
             <property name="hibernate.ogm.datastore.host" value="localhost" />
 
             <property name="hibernate.ogm.datastore.create_database" value="true" />
-            <property name="hibernate.ogm.datastore.username" value="root" />
-            <property name="hibernate.ogm.datastore.password" value="root" />
+            <property name="hibernate.ogm.datastore.username" value="muuvy" />
+            <property name="hibernate.ogm.datastore.password" value="muuvy" />
         </properties>
     </persistence-unit>
 </persistence>

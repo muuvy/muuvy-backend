@@ -3,14 +3,14 @@ package org.muuvy.backend.business.dao;
 import org.muuvy.backend.persistence.models.Favorite;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @ApplicationScoped
 public class FavoriteDAO {
-	
-	@Inject
+
+	@PersistenceContext(unitName = "muuvy")
 	private EntityManager em;
 
 	public List getAll() {
@@ -19,10 +19,6 @@ public class FavoriteDAO {
 
 	public Favorite findById(String id) {
 		return em.find(Favorite.class, id);
-	}
-
-	public void setEntityManager(EntityManager em) {
-		this.em = em;
 	}
 
 	public void update(Favorite favorite) {

@@ -5,12 +5,13 @@ import org.muuvy.backend.persistence.models.User;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @ApplicationScoped
 public class UserDAO {
 
-	@Inject
+	@PersistenceContext(unitName = "muuvy")
 	private EntityManager em;
 
 	public List getAll() {
