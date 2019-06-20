@@ -11,7 +11,7 @@ public class EntityManagerProducer {
     @Produces
     public EntityManager createEntityManager() {
         return Persistence
-                .createEntityManagerFactory("restapi-unit")
+                .createEntityManagerFactory("muuvy")
                 .createEntityManager();
     }
 
