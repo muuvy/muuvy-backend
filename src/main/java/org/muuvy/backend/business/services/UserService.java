@@ -6,6 +6,8 @@ import org.muuvy.backend.persistence.models.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class UserService {
@@ -27,6 +29,11 @@ public class UserService {
 
 	public UserDto getUser(String id) {
 		User user = userDAO.findById(id);
-		return new UserDto(user.getId(), user.getFullName());
+		return new UserDto(user.getId(), user.getFullName(), user.getApiKey());
+	}
+
+	public List<UserDto> getUsers() {
+		List<User> users = userDAO.getAll();
+		return users.stream().map(u -> new UserDto(u.getId(), u.getFullName(), u.getApiKey())).collect(Collectors.toList());
 	}
 }

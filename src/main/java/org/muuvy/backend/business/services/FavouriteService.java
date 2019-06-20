@@ -6,6 +6,8 @@ import org.muuvy.backend.persistence.models.Favorite;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class FavouriteService {
@@ -13,7 +15,7 @@ public class FavouriteService {
 	private FavoriteDAO favoriteDAO;
 
 	public void createFavourite(FavouriteDto favouriteDto) {
-		Favorite favorite = new Favorite(favouriteDto.getId());
+		Favorite favorite = new Favorite(favouriteDto.getId(), favouriteDto.getUserId());
 		favoriteDAO.create(favorite);
 	}
 
@@ -22,7 +24,9 @@ public class FavouriteService {
 		favoriteDAO.delete(getFavorite);
 	}
 
-	public FavouriteDto getFavoutire(FavouriteDto favourite) {
-		return favourite;
+	public List<FavouriteDto> getFavouritesByUserId(String userId) {
+		List<Favorite> favorites = favoriteDAO.getAll();
+		return favorites.stream().filter(fM -> fM.getUserId().equals(userId))
+				.map(f -> new FavouriteDto(f.getId(), f.getUserId())).collect(Collectors.toList());
 	}
 }

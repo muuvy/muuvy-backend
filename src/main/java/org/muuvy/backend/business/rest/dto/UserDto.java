@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 public class UserDto {
 	private String id;
 	private String fullName;
+	private String apiKey;
 
 	public String getId() {
 		return id;
@@ -23,5 +24,13 @@ public class UserDto {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public String getApiKey() {
+		return apiKey;
+	}
+
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
 	}
 }

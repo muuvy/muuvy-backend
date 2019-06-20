@@ -6,10 +6,14 @@ import org.muuvy.backend.business.services.FavouriteService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 
 @Path("/user/{userId}/favourite")
+@Produces("application/json")
 public class FavouriteController {
 	private static final Logger LOG = Logger.getLogger(FavouriteController.class);
 
@@ -20,37 +24,40 @@ public class FavouriteController {
 	private String userId;
 
 	@GET
-	@Produces("text/plain")
-	public Response doGet() {
+	public Response getFavorites(@Context HttpHeaders headers) {
 		try {
-			LOG.info(doGet());
-			return Response.ok(String.format("Hello %s from FavouriteService", userId)).build();
+			String userAgent = headers.getRequestHeader("user-agent").get(0);
+			LOG.info(String.format("start getFavorites. useragent %s", userAgent));
+			List<FavouriteDto> favourites = favouriteService.getFavouritesByUserId(userId);
+			return Response.ok(favourites).build();
 		} catch (Exception e) {
-			LOG.error(doGet());
+			LOG.error(String.format("Error in getUsers. Message %s", e.getMessage()), e);
 			return Response.serverError().build();
 		}
 	}
 
 	@POST
-	public Response createFavourite(FavouriteDto favourite) {
+	public Response createFavourite(@Context HttpHeaders headers, FavouriteDto favourite) {
 		try {
+			String userAgent = headers.getRequestHeader("user-agent").get(0);
+			LOG.info(String.format("start getUsers. useragent %s", userAgent));
 			favouriteService.createFavourite(favourite);
-			LOG.info(favourite);
 			return Response.ok().build();
 		} catch (Exception e) {
-			LOG.error(favourite);
+			LOG.error(String.format("Error in createFavourite. Message %s", e.getMessage()), e);
 			return Response.serverError().build();
 		}
 	}
 
 	@DELETE
-	public Response deleteFavourite(@QueryParam("movieId") String movieId) {
+	public Response deleteFavourite(@Context HttpHeaders headers, @QueryParam("movieId") String movieId) {
 		try {
+			String userAgent = headers.getRequestHeader("user-agent").get(0);
+			LOG.info(String.format("start getUsers. useragent %s", userAgent));
 			favouriteService.deleteFavouriteId(movieId);
-			LOG.info(movieId);
 			return Response.ok(String.format("deleted %s", movieId)).build();
 		} catch (Exception e) {
-			LOG.error(movieId);
+			LOG.error(String.format("Error in deleteFavourite. Message %s", e.getMessage()), e);
 			return Response.serverError().build();
 		}
 	}
