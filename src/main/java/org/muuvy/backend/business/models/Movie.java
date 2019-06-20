@@ -1,4 +1,4 @@
-package org.muuvy.backend.models;
+package org.muuvy.backend.business.models;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class Movie {
     private String overview;
     private float popularity;
     private String posterPath;
-    List<ProductionCompanie> productionCompanies;
+    List<ProductionCompany> productionCompanies;
     List<ProductionCountry> productionCountries;
     private String releaseDate;
     private float revenue;
@@ -33,7 +33,7 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(Integer id, boolean adult, String backdropPath, String belongsToCollection, float budget, List<Genres> genres, String homepage, String imdbId, String originalLanguage, String originalTitle, String overview, float popularity, String posterPath, List<ProductionCompanie> productionCompanies, List<ProductionCountry> productionCountries, String releaseDate, float revenue, float runtime, List<SpokenLanguage> spokenLanguages, String status, String tagline, String title, boolean video, float voteAverage, float voteCount) {
+    public Movie(Integer id, boolean adult, String backdropPath, String belongsToCollection, float budget, List<Genres> genres, String homepage, String imdbId, String originalLanguage, String originalTitle, String overview, float popularity, String posterPath, List<ProductionCompany> productionCompanies, List<ProductionCountry> productionCountries, String releaseDate, float revenue, float runtime, List<SpokenLanguage> spokenLanguages, String status, String tagline, String title, boolean video, float voteAverage, float voteCount) {
         this.id = id;
         this.adult = adult;
         this.backdropPath = backdropPath;
@@ -165,11 +165,11 @@ public class Movie {
         this.posterPath = posterPath;
     }
 
-    public List<ProductionCompanie> getProductionCompanies() {
+    public List<ProductionCompany> getProductionCompanies() {
         return productionCompanies;
     }
 
-    public void setProductionCompanies(List<ProductionCompanie> productionCompanies) {
+    public void setProductionCompanies(List<ProductionCompany> productionCompanies) {
         this.productionCompanies = productionCompanies;
     }
 

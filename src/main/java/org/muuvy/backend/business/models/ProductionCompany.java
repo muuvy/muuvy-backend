@@ -1,6 +1,6 @@
-package org.muuvy.backend.models;
+package org.muuvy.backend.business.models;
 
-public class ProductionCompanie {
+public class ProductionCompany {
 
     private Integer Integer;
     private String logoPath;

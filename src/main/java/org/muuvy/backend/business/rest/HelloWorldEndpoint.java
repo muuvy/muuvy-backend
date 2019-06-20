@@ -1,4 +1,4 @@
-package org.muuvy.backend.hello;
+package org.muuvy.backend.business.rest;
 
 
 import javax.ws.rs.Path;
