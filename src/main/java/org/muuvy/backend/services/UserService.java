@@ -3,6 +3,9 @@ package org.muuvy.backend.services;
 import org.muuvy.backend.dto.UserDto;
 import org.muuvy.backend.models.UserModel;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class UserService {
 
     UserDto userDto;
