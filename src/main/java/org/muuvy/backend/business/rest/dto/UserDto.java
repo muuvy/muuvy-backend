@@ -1,7 +1,9 @@
 package org.muuvy.backend.business.rest.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
     private String id;
