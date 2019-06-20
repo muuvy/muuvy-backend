@@ -15,7 +15,7 @@ __Requirements__
 
 To install the dependencies, first run `mvn install`. Run the application with this command:
 ```
-$ mvn package && java -jar target/muuvy-app-backend-thorntail.jar -Slocal
+$ mvn thorntai:run
 ```
 
 Verify if the server is up and running, by visit this url: http://localhost:8080/hello
