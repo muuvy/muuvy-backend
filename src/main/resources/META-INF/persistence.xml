@@ -7,6 +7,7 @@
     <persistence-unit name="restapi-unit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
         <class>org.muuvy.backend.persistence.models.User</class>
+        <class>org.muuvy.backend.persistence.models.Favorite</class>
         <properties>
             <property name="hibernate.ogm.datastore.provider" value="mongodb" />
             <property name="hibernate.ogm.datastore.database" value="muuvy" />
