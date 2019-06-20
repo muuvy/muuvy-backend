@@ -8,5 +8,4 @@ public class UserDto {
         this.id = id;
         this.fullName= fullName;
     }
-
 }

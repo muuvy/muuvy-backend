@@ -9,7 +9,6 @@ public class UserService {
     UserModel userModel;
 
     public UserDto createUser(String id, String  name){
-        userDto.
 
         return userDto ;
     }
@@ -27,8 +26,8 @@ public class UserService {
 
 
     public void createUser(UserDto user) {
-        userModel.setUserId(user);
-        userModel.setUserFullName();
+        //userModel.setUserId(user);
+        //userModel.setUserFullName();
     }
 
     public void deleteById(String userId) {
