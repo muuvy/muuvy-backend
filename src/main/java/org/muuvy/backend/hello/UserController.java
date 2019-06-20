@@ -4,13 +4,15 @@ package org.muuvy.backend.hello;
 import org.muuvy.backend.dto.UserDto;
 import org.muuvy.backend.services.UserService;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 
 @Path("/user")
-public class UserContoller {
+public class UserController {
 
+	@Inject
 	private UserService userService;
 
 	@GET

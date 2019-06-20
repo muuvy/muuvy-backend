@@ -2,18 +2,21 @@ package org.muuvy.backend.services;
 
 import org.muuvy.backend.dto.UserDto;
 
+import javax.inject.Inject;
+
 public class UserService {
 
+    @Inject
     UserDto userDto;
 
-    public UserDto createUser(String id, String  name){
+    public UserDto createUser(UserDto user){
 
-        UserDto userDto = new UserDto(id,name);
+
 
         return userDto ;
     }
 
-    public void deleteById(){
+    public void deleteById(String id){
 
 
 
@@ -25,12 +28,7 @@ public class UserService {
     }
 
 
-    public void createUser(UserDto user) {
 
 
 
-    }
-
-    public void deleteById(String userId) {
-    }
 }
