@@ -1,9 +1,11 @@
-package org.muuvy.backend.dto;
+package org.muuvy.backend.business.rest.dto;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class UserDto {
     private String id;
     private String fullName;
-
 
 
     public String getId() {

@@ -1,7 +1,7 @@
-package org.muuvy.backend.controllers;
+package org.muuvy.backend.business.rest;
 
-import org.muuvy.backend.dto.FavouriteDto;
-import org.muuvy.backend.services.FavouriteService;
+import org.muuvy.backend.business.rest.dto.FavouriteDto;
+import org.muuvy.backend.business.services.FavouriteService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

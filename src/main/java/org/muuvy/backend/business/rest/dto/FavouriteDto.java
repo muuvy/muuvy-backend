@@ -1,4 +1,4 @@
-package org.muuvy.backend.dto;
+package org.muuvy.backend.business.rest.dto;
 
 public class FavouriteDto {
     private String id;
