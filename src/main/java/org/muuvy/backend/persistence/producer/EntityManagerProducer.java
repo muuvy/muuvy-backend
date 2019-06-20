@@ -8,15 +8,16 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 public class EntityManagerProducer {
 
-    @Produces
-    public EntityManager createEntityManager() {
-        return Persistence
-                .createEntityManagerFactory("muuvy")
-                .createEntityManager();
-    }
+	@Produces
+	@ApplicationScoped
+	public EntityManager createEntityManager() {
+		return Persistence
+				.createEntityManagerFactory("muuvy")
+				.createEntityManager();
+	}
 
-    public void close(EntityManager entityManager) {
-        entityManager.close();
-    }
+	public void close(EntityManager entityManager) {
+		entityManager.close();
+	}
 
 }

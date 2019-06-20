@@ -9,24 +9,20 @@ import javax.inject.Inject;
 
 @ApplicationScoped
 public class FavouriteService {
-    @Inject
-    private FavoriteDAO favoriteDAO;
+	@Inject
+	private FavoriteDAO favoriteDAO;
 
-    public void createFavourite(FavouriteDto favouriteDto) {
-        Favorite favorite = new Favorite(favouriteDto.getId());
-        favoriteDAO.create(favorite);
-    }
+	public void createFavourite(FavouriteDto favouriteDto) {
+		Favorite favorite = new Favorite(favouriteDto.getId());
+		favoriteDAO.create(favorite);
+	}
 
+	public void deleteFavouriteId(String movieId) {
+		Favorite getFavorite = favoriteDAO.findById(movieId);
+		favoriteDAO.delete(getFavorite);
+	}
 
-    public void deleteFavouriteId(String movieId) {
-        Favorite getFavorite = favoriteDAO.findById(movieId);
-        favoriteDAO.delete(getFavorite);
-    }
-
-    public FavouriteDto getFavoutire(FavouriteDto favourite){
-
-        return favourite;
-    }
-
-
+	public FavouriteDto getFavoutire(FavouriteDto favourite) {
+		return favourite;
+	}
 }
