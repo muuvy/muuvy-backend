@@ -11,12 +11,14 @@ public class UserService {
     UserDto userDto;
     UserModel userModel;
 
-    public UserDto createUser(String id, String  name){
+    public UserDto createUser(UserDto user){
+
+
 
         return userDto ;
     }
 
-    public void deleteById(){
+    public void deleteById(String id){
 
 
 
@@ -28,11 +30,7 @@ public class UserService {
     }
 
 
-    public void createUser(UserDto user) {
-        //userModel.setUserId(user);
-        //userModel.setUserFullName();
-    }
 
-    public void deleteById(String userId) {
-    }
+
+
 }

@@ -3,21 +3,25 @@ package org.muuvy.backend.hello;
 import org.muuvy.backend.dto.FavouriteDto;
 import org.muuvy.backend.services.FavouriteService;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 
 
-@Path("/api")
+@Path("/user/{userId}/favourite")
 public class FavouriteController {
-
+    @Inject
     private FavouriteService favouriteService;
+
+    @PathParam("userId")
+    private String userId;
 
 
     @GET
     @Produces("text/plain")
     public Response doGet(){
-        return Response.ok("Hello from FavouriteService").build();
+        return Response.ok(String.format("Hello %s from FavouriteService", userId)).build();
     }
 
     @POST

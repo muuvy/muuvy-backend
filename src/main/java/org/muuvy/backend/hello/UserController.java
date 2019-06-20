@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 
 
 @Path("/user")
-public class UserContoller {
+public class UserController {
 
 	@Inject
 	private UserService userService;
