@@ -6,11 +6,20 @@ import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class FavouriteService {
-    public void createFavourite(FavouriteDto favourite) {
+
+    public FavouriteDto createFavourite(FavouriteDto favourite) {
+
+        return favourite;
     }
 
 
     public void deleteFavouriteId(String movieId) {
+
+    }
+
+    public FavouriteDto getFavoutire(FavouriteDto favourite){
+
+        return favourite;
     }
 
 

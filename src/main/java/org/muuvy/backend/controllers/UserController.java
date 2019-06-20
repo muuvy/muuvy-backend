@@ -30,6 +30,6 @@ public class UserController {
 	@DELETE
 	public Response deleteUser(@QueryParam("userId") String userId){
 		userService.deleteById(userId);
-		return Response.ok().build();
+		return Response.ok(String.format("deleted %s", userId)).build();
 	}
 }
