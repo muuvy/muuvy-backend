@@ -9,6 +9,6 @@ public class UserDto {
         this.fullName= fullName;
     }
 
-    pubic void
+
 
 }

@@ -8,6 +8,7 @@ public class UserService {
 
     public UserDto createUser(String id, String  name){
 
+        UserDto userDto = new UserDto(id,name);
 
         return userDto ;
     }
