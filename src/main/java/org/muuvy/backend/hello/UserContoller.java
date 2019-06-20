@@ -19,7 +19,6 @@ public class UserContoller {
 		return Response.ok("Hello from userController!").build();
 	}
 
-
 	@POST
 	public Response createUser(UserDto user){
 		userService.createUser(user);
