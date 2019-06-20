@@ -1,6 +1,9 @@
 package org.muuvy.backend.hello;
 
 
+import org.muuvy.backend.dto.UserDto;
+import org.muuvy.backend.services.UserService;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
@@ -19,7 +22,7 @@ public class UserContoller {
 
 	@POST
 	public Response createUser(UserDto user){
-		userService.createuser(user);
+		userService.createUser(user);
 		return Response.ok().build();
 	}
 
