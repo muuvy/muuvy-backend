@@ -12,6 +12,7 @@
 
 ### Requirements
 
+* Install Lombok Plugin [Intellij Plugin](https://plugins.jetbrains.com/plugin/6317-lombok) / [Jar](https://search.maven.org/search?q=g:org.projectlombok%20AND%20a:lombok&core=gav) / [VS Code Plugin](https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok)
 * Install Maven 3.3+ from [here](https://maven.apache.org/guides/getting-started/)
 * Start docker-compose `mongo db` using these [steps](https://github.com/muuvy/database)
 
