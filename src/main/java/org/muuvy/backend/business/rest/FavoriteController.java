@@ -10,8 +10,8 @@ import javax.ws.rs.core.Response;
 
 
 @Path("/user/{userId}/favourite")
-public class FavouriteController {
-    private static final Logger LOG = Logger.getLogger(FavouriteController.class);
+public class FavoriteController {
+    private static final Logger LOG = Logger.getLogger(FavoriteController.class);
 
 
     @Inject
@@ -40,9 +40,9 @@ public class FavouriteController {
 
 
     @POST
-    public Response createFavourite(FavouriteDto favourite){
+    public Response createFavorite(FavouriteDto favourite){
         try {
-            favouriteService.createFavourite(favourite);
+            favouriteService.createFavorite(favourite);
             LOG.info(favourite);
             return Response.ok().build();
         }catch (Exception e){
@@ -52,9 +52,9 @@ public class FavouriteController {
     }
 
     @DELETE
-    public Response deleteFavourite(@QueryParam("movieId") String movieId){
+    public Response deleteFavorite(@QueryParam("movieId") String movieId){
         try {
-            favouriteService.deleteFavouriteId(movieId);
+            favouriteService.deleteFavoriteId(movieId);
             LOG.info(movieId);
             return Response.ok(String.format("deleted %s", movieId)).build();
         }catch (Exception e){

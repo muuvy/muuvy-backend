@@ -12,18 +12,18 @@ public class FavouriteService {
     @Inject
     private FavoriteDAO favoriteDAO;
 
-    public void createFavourite(FavouriteDto favouriteDto) {
+    public void createFavorite(FavouriteDto favouriteDto) {
         Favorite favorite = new Favorite(favouriteDto.getId());
         favoriteDAO.create(favorite);
     }
 
 
-    public void deleteFavouriteId(String movieId) {
+    public void deleteFavoriteId(String movieId) {
         Favorite getFavorite = favoriteDAO.findById(movieId);
         favoriteDAO.delete(getFavorite);
     }
 
-    public FavouriteDto getFavoutire(FavouriteDto favourite){
+    public FavouriteDto getFavotire(FavouriteDto favourite){
 
         return favourite;
     }
