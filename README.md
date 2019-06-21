@@ -1,7 +1,8 @@
 # muuvy rest-api
 
 [![Build Status](https://travis-ci.org/muuvy/muuvy-backend.svg?branch=master)](https://travis-ci.org/muuvy/muuvy-backend)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=muuvy_app-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=muuvy_app-backend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=org.muuvy.backend%3Amuuvy-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.muuvy.backend%3Amuuvy-backend)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.muuvy.backend%3Amuuvy-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=org.muuvy.backend%3Amuuvy-backend)
 
 ## Defintions
 
