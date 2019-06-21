@@ -1,37 +1,47 @@
 # muuvy rest-api
 
-[![Build Status](https://travis-ci.com/muuvy/app-backend.svg?branch=dev)](https://travis-ci.com/muuvy/app-backend) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=muuvy_app-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=muuvy_app-backend)
+[![Build Status](https://travis-ci.org/muuvy/muuvy-backend.svg?branch=master)](https://travis-ci.org/muuvy/muuvy-backend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=muuvy_app-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=muuvy_app-backend)
 
-### Defintions
+## Defintions
 
 * Throntail Version: `2.4.0.Final`
 * Config files in `YAML` format
 
-### Project Setup
+## Project Setup
 
-__Requirements__
+### Requirements
 
-* Install Maven 3.3+ https://maven.apache.org/guides/getting-started/
+* Install Maven 3.3+ from [here](https://maven.apache.org/guides/getting-started/)
 
 To install the dependencies, first run `mvn install`. Run the application with this command:
-```
+
+``` bash
 $ mvn thorntai:run
+Thorntail is ready
 ```
 
 Verify if the server is up and running, by visit this url: http://localhost:8080/hello
 
-### Configuration
+## Configuration
 
-All configurations are located in `src/main/resources/config`. Each environment has its own config file. 
+All thorntail configurations are located in `src/main/resources/project-local.yml`. Each environment has its own config file.
 
-__Config selection__
+## Components
 
-| Type | Example | Docs |
-|----------------------|--------------------------------------------|----------------------------------------------------------------------------------------|
-| Environment Variable | JAVA_OPTS="-Dthorntail.project.stage=prod" | https://github.com/cloudfoundry/java-buildpack/blob/master/docs/framework-java_opts.md |
-| Start Command | java -jar muuvy-app-backend.jar -Slocal |  |
+### Thorntail
 
-### REST Client 
+* JAX RS
+* LOG
+* CDI
 
-* source: https://github.com/eclipse/microprofile-rest-client
-* implementation: https://github.com/thorntail/thorntail/tree/master/fractions/microprofile/microprofile-restclient
+### JBoss
+
+* Logger
+
+### Misc
+
+* Lombok
+* Junit Jupiter
+* Mongo Java Driver
+* Hibernate OGM Mongo
