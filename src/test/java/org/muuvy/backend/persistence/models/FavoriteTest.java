@@ -10,7 +10,7 @@ class FavoriteTest {
 	@Test
 	public void createFavoriteTest() {
 		FavoriteDAO favoriteDAO = new FavoriteDAO();
-		favoriteDAO.create(new Favorite("movie123"));
+		favoriteDAO.create(new Favorite("movie123", "user123"));
 		assertNotNull(favoriteDAO.getAll());
 	}
 

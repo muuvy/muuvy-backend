@@ -4,6 +4,7 @@ import org.jboss.logging.Logger;
 import org.muuvy.backend.business.rest.dto.UserDto;
 import org.muuvy.backend.business.services.UserService;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/user")
 @Produces("application/json")
+@ApplicationScoped
 public class UserController {
 
 	private static final Logger LOG = Logger.getLogger(UserController.class);

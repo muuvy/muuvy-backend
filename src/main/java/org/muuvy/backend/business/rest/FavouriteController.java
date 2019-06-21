@@ -4,6 +4,7 @@ import org.jboss.logging.Logger;
 import org.muuvy.backend.business.rest.dto.FavouriteDto;
 import org.muuvy.backend.business.services.FavouriteService;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Path("/user/{userId}/favourite")
 @Produces("application/json")
+@ApplicationScoped
 public class FavouriteController {
 	private static final Logger LOG = Logger.getLogger(FavouriteController.class);
 

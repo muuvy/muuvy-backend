@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class FavouriteService {
+
 	@Inject
 	private FavoriteDAO favoriteDAO;
 
