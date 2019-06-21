@@ -1,4 +1,4 @@
-package org.muuvy.backend.persistence.producer;
+package org.muuvy.backend.persistence;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -18,5 +18,4 @@ public class EntityManagerProducer {
     public void close(EntityManager entityManager) {
         entityManager.close();
     }
-
 }

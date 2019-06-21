@@ -1,9 +1,8 @@
-package org.muuvy.backend.business.rest;
+package org.muuvy.backend;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 @ApplicationPath("/api")
 public class RestApplication extends Application {
-
 }

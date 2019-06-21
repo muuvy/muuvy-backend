@@ -1,6 +1,9 @@
 language: java
+branches:
+  only:
+  - master
 jdk:
-- openjdk8
+  - oraclejdk11
 addons:
   sonarcloud:
     organization: muuvy

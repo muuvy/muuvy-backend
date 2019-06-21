@@ -1,11 +1,10 @@
 package org.muuvy.backend.persistence.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 
@@ -14,33 +13,32 @@ import javax.persistence.NamedQuery;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    @Id
-    private String id;
-    private String fullName;
-    private String apiKey;
+	@Id
+	private String id;
+	private String fullName;
+	private String apiKey;
 
-    public String getApiKey() {
-        return apiKey;
-    }
+	public String getApiKey() {
+		return apiKey;
+	}
 
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
+	}
 
+	public String getId() {
+		return id;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getFullName() {
+		return fullName;
+	}
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 }
