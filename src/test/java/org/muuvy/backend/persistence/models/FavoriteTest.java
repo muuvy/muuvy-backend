@@ -1,7 +1,6 @@
 package org.muuvy.backend.persistence.models;
 
 import org.junit.jupiter.api.Test;
-import org.muuvy.backend.business.dao.FavoriteDAO;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
