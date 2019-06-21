@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.muuvy.backend</groupId>
     <artifactId>muuvy-backend</artifactId>
-    <name>Muuvy Backend Application</name>
+    <name>muuvy-backend</name>
     <packaging>war</packaging>
     <version>1.0.0</version>
     
