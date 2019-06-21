@@ -13,6 +13,7 @@
 ### Requirements
 
 * Install Maven 3.3+ from [here](https://maven.apache.org/guides/getting-started/)
+* Start docker-compose `mongo db` using these [steps](https://github.com/muuvy/database)
 
 To install the dependencies, first run `mvn install`. Run the application with this command:
 
@@ -21,7 +22,7 @@ $ mvn thorntai:run
 Thorntail is ready
 ```
 
-Verify if the server is up and running, by visit this url: http://localhost:8080/hello
+Verify if the server is up and running, by visit this [url](http://localhost:8080/api/user)
 
 ## Configuration
 
