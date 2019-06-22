@@ -35,7 +35,8 @@ Verify if the server is up and running, by visit this [url](http://localhost:808
 
 All thorntail configurations are located in `src/main/resources/project-local.yml`. Each environment has its own config file.
 
-- For Prometheus: copy the file and put this inside the extracted file: https://github.com/muuvy/docs/tree/master/prometheus
+- Prometheus: copy the file and put this inside the extracted file: https://github.com/muuvy/docs/tree/master/prometheus
+-- Run prometheus.exe and you can call this URL: localhost:9090
 
 ## Components
 
