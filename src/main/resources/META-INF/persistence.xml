@@ -8,8 +8,8 @@
         <properties>
             <property name="hibernate.ogm.datastore.provider" value="mongodb" />
             <property name="hibernate.ogm.datastore.database" value="muuvy" />
-            <property name="hibernate.ogm.datastore.host" value="localhost" />
-            <property name="hibernate.ogm.mongodb.authentication_database" value="admin" />
+            <property name="hibernate.ogm.datastore.host" value="127.0.0.1" />
+            <property name="hibernate.ogm.mongodb.authentication_database" value="muuvy" />
             <property name="hibernate.ogm.datastore.create_database" value="true" />
             <property name="hibernate.ogm.datastore.username" value="muuvy" />
             <property name="hibernate.ogm.datastore.password" value="muuvy" />

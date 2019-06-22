@@ -1,5 +1,7 @@
 package org.muuvy.backend.business.rest.dto;
 
+import java.util.Set;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +11,7 @@ public class UserDto {
 	private String id;
 	private String fullName;
 	private String apiKey;
+	private Set<FavoriteDto> favorites;
 
 	public String getId() {
 		return id;
@@ -32,5 +35,13 @@ public class UserDto {
 
 	public void setApiKey(String apiKey) {
 		this.apiKey = apiKey;
+	}
+
+	public Set<FavoriteDto> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(Set<FavoriteDto> favorites) {
+		this.favorites = favorites;
 	}
 }

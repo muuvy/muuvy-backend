@@ -2,11 +2,17 @@ package org.muuvy.backend.business.services;
 
 import org.muuvy.backend.business.dao.UserDAO;
 import org.muuvy.backend.business.rest.dto.UserDto;
+import org.muuvy.backend.business.rest.dto.FavoriteDto;
+import org.muuvy.backend.persistence.models.Favorite;
 import org.muuvy.backend.persistence.models.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -17,7 +23,7 @@ public class UserService {
 	private UserDAO userDAO;
 
 	public UserDto createUser(UserDto userDto) {
-		User user = new User(userDto.getId(), userDto.getFullName(), API_KEY);
+		User user = new User(userDto.getId(), userDto.getFullName(), API_KEY, new HashSet<Favorite>());
 		userDAO.create(user);
 		return userDto;
 	}
@@ -29,11 +35,20 @@ public class UserService {
 
 	public UserDto getUser(String id) {
 		User user = userDAO.findById(id);
-		return new UserDto(user.getId(), user.getFullName(), user.getApiKey());
+		Set<FavoriteDto> favorites = user.getFavorites().stream().map(f -> new FavoriteDto(f.getId(), f.getMovieId()))
+				.collect(Collectors.toSet());
+		return new UserDto(user.getId(), user.getFullName(), user.getApiKey(), favorites);
 	}
 
 	public List<UserDto> getUsers() {
 		List<User> users = userDAO.getAll();
-		return users.stream().map(u -> new UserDto(u.getId(), u.getFullName(), u.getApiKey())).collect(Collectors.toList());
+		List<UserDto> userDtos = new ArrayList<UserDto>();
+		for (User user : users) {
+			Set<FavoriteDto> favorites = user.getFavorites().stream().map(f -> new FavoriteDto(f.getId(), f.getMovieId()))
+					.collect(Collectors.toSet());
+			UserDto userDto = new UserDto(user.getId(), user.getFullName(), user.getApiKey(), favorites);
+			userDtos.add(userDto);
+		}
+		return userDtos;
 	}
 }

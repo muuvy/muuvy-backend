@@ -8,7 +8,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class FavoriteService {
@@ -17,22 +16,16 @@ public class FavoriteService {
 	private FavoriteDAO favoriteDAO;
 
 	public void createFavorite(FavoriteDto favoriteDto) {
-		Favorite favorite = new Favorite(favoriteDto.getId(), favoriteDto.getUserId());
+		Favorite favorite = new Favorite(favoriteDto.getMovieId());
 		favoriteDAO.create(favorite);
 	}
 
-	public void deleteFavoriteId(String movieId, String userId) {
+	public void deleteFavoriteId(String id, String movieId) {
 		List<Favorite> favorites = favoriteDAO.getAll();
 		Optional<Favorite> favorite = favorites.stream()
-				.filter(fM -> fM.getUserId().equals(userId) && fM.getId().equals(movieId)).findFirst();
+				.filter(fM -> fM.getId().equals(movieId) && fM.getId().equals(movieId)).findFirst();
 		if (favorite.isPresent()) {
 			favoriteDAO.delete(favorite.get());
 		}
-	}
-
-	public List<FavoriteDto> getFavoritesByUserId(String userId) {
-		List<Favorite> favorites = favoriteDAO.getAll();
-		return favorites.stream().filter(fM -> fM.getUserId().equals(userId))
-				.map(f -> new FavoriteDto(f.getId(), f.getUserId())).collect(Collectors.toList());
 	}
 }

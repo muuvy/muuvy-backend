@@ -2,7 +2,9 @@ package org.muuvy.backend.business.rest;
 
 import org.jboss.logging.Logger;
 import org.muuvy.backend.business.rest.dto.FavoriteDto;
+import org.muuvy.backend.business.rest.dto.UserDto;
 import org.muuvy.backend.business.services.FavoriteService;
+import org.muuvy.backend.business.services.UserService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -21,6 +23,9 @@ public class FavoriteController {
 	@Inject
 	private FavoriteService favoriteService;
 
+	@Inject
+	private UserService userService;
+
 	@PathParam("userId")
 	private String userId;
 
@@ -29,8 +34,8 @@ public class FavoriteController {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
 			LOG.info(String.format("start getFavorites. useragent %s", userAgent));
-			List<FavoriteDto> favourites = favoriteService.getFavoritesByUserId(userId);
-			return Response.ok(favourites).build();
+			UserDto user = userService.getUser(userId);
+			return Response.ok(user.getFavorites()).build();
 		} catch (Exception e) {
 			LOG.error(String.format("Error in getUsers. Message %s", e.getMessage()), e);
 			return Response.serverError().build();

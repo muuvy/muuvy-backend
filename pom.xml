@@ -120,14 +120,14 @@
         <dependency>
             <groupId>org.hibernate.ogm</groupId>
             <artifactId>hibernate-ogm-mongodb</artifactId>
-            <version>5.0.0.Final</version>
+            <version>5.4.1.Final</version>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver -->
         <dependency>
             <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>3.8.0</version>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.10.2</version>
         </dependency>
         
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
