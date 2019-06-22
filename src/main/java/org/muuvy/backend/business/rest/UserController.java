@@ -34,6 +34,20 @@ public class UserController {
 	}
 
 	@POST
+	@Path("/login")
+	public Response loginUser(@Context HttpHeaders headers, UserDto user) {
+		try {
+			String userAgent = headers.getRequestHeader("user-agent").get(0);
+			LOG.info(String.format("start createUser. useragent %s", userAgent));
+			userService.login(user);
+			return Response.ok().build();
+		} catch (Exception e) {
+			LOG.error(String.format("Error in createUser. Message %s", e.getMessage()), e);
+			return Response.serverError().build();
+		}
+	}
+
+	@POST
 	public Response createUser(@Context HttpHeaders headers, UserDto user) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);

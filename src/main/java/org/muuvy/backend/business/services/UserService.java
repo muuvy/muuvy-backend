@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,22 @@ public class UserService {
 		user.setApiKey(API_KEY);
 		user.setFavorites(new HashSet<Favorite>());
 		userDAO.create(user);
+		return userDto;
+	}
+
+	public UserDto login(UserDto userDto) {
+		Optional<User> optionalUser = userDAO.getAll().stream().filter(u -> u.getFullName().equals(userDto.getFullName()))
+				.findFirst();
+		User user = null;
+		if (optionalUser.isPresent()) {
+			user = optionalUser.get();
+		} else {
+			user = new User();
+			user.setFullName(userDto.getFullName());
+			user.setApiKey(API_KEY);
+			user.setFavorites(new HashSet<Favorite>());
+			userDAO.create(user);
+		}
 		return userDto;
 	}
 
