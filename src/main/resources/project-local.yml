@@ -1,6 +1,6 @@
 thorntail:
   http:
-    port: 8080
+    port: 8888
   logging:
     pattern-formatters:
       DEFAULT:
