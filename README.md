@@ -16,6 +16,11 @@
 * Install Lombok Plugin [Intellij Plugin](https://plugins.jetbrains.com/plugin/6317-lombok) / [Jar](https://search.maven.org/search?q=g:org.projectlombok%20AND%20a:lombok&core=gav) / [VS Code Plugin](https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok)
 * Install Maven 3.3+ from [here](https://maven.apache.org/guides/getting-started/)
 * Start docker-compose `mongo db` using these [steps](https://github.com/muuvy/database)
+* download and extract Prometheus:
+```
+wget https://github.com/prometheus/prometheus/releases/download/v2.10.0/prometheus-2.10.0.windows-amd64.tar.gz
+tar -xvf  prometheus-2.10.0.windows-amd64.tar.gz prometheus-2.10.0.windows-amd64/
+```    
 
 To install the dependencies, first run `mvn install`. Run the application with this command:
 
@@ -29,6 +34,10 @@ Verify if the server is up and running, by visit this [url](http://localhost:808
 ## Configuration
 
 All thorntail configurations are located in `src/main/resources/project-local.yml`. Each environment has its own config file.
+
+- Prometheus: copy the file and put this inside the extracted file: https://github.com/muuvy/docs/tree/master/prometheus
+- Run prometheus.exe and you can call this URL: localhost:9090
+- more information here: https://github.com/muuvy/muuvy-backend/issues/8
 
 ## Components
 
