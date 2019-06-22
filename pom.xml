@@ -25,6 +25,7 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     
@@ -81,6 +82,10 @@
         <dependency>
             <groupId>io.thorntail</groupId>
             <artifactId>jaxrs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.thorntail</groupId>
+            <artifactId>microprofile-metrics</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.thorntail/cdi -->
         <dependency>
