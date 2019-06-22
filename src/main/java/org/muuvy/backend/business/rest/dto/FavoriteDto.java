@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class FavouriteDto {
+public class FavoriteDto {
 	private String id;
 	private String userId;
 
