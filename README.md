@@ -20,7 +20,7 @@
 To install the dependencies, first run `mvn install`. Run the application with this command:
 
 ``` bash
-$ mvn thorntai:run
+$ mvn thorntail:run
 Thorntail is ready
 ```
 
