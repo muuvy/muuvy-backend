@@ -12,7 +12,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("/user/{userId}/favourite")
 @Produces("application/json")

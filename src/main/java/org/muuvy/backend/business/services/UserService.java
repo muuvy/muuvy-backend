@@ -23,7 +23,10 @@ public class UserService {
 	private UserDAO userDAO;
 
 	public UserDto createUser(UserDto userDto) {
-		User user = new User(userDto.getId(), userDto.getFullName(), API_KEY, new HashSet<Favorite>());
+		User user = new User();
+		user.setFullName(userDto.getFullName());
+		user.setApiKey(API_KEY);
+		user.setFavorites(new HashSet<Favorite>());
 		userDAO.create(user);
 		return userDto;
 	}
