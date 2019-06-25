@@ -29,11 +29,26 @@ $ mvn thorntail:run
 Thorntail is ready
 ```
 
-Verify if the server is up and running, by visit this [url](http://localhost:8080/api/user)
+`Port: 8888`
+
+Verify if the server is up and running, by visit this http://localhost:8888/api/users
+
+### Endpoints
+
+- GET /api/users
+- POST /api/users
+- DELETE /api/users
+- GET /api/users/{userId}
+- GET /api/users/{userId}/favourites
+- POST /api/users/{userId}/favourites
+- DELETE /api/users/{userId}/favourites
+- GET /api/users/search/{userName}
+- POST /api/login
+
 
 ## Configuration
 
-All thorntail configurations are located in `src/main/resources/project-local.yml`. Each environment has its own config file.
+All thorntail configurations are located in `src/main/resources/project-defaults.yml`. Each environment has its own config file.
 
 - Prometheus: copy the file and put this inside the extracted file: https://github.com/muuvy/docs/tree/master/prometheus
 - Run prometheus.exe and you can call this URL: localhost:9090

@@ -1,5 +1,6 @@
 package org.muuvy.backend.business.rest;
 
+
 import org.jboss.logging.Logger;
 import org.muuvy.backend.business.rest.dto.FavoriteDto;
 import org.muuvy.backend.business.rest.dto.UserDto;
@@ -13,10 +14,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 
-@Path("/user/{userId}/favourite")
+@Path("/")
 @Produces("application/json")
 @ApplicationScoped
 public class FavoriteController {
+
 	private static final Logger LOG = Logger.getLogger(FavoriteController.class);
 
 	@Inject
@@ -25,11 +27,24 @@ public class FavoriteController {
 	@Inject
 	private UserService userService;
 
-	@PathParam("userId")
-	private String userId;
+	@GET
+	@Path("/favourites")
+	public Response getFavorites(@Context HttpHeaders headers) {
+		try {
+
+			String userAgent = headers.getRequestHeader("user-agent").get(0);
+			LOG.debugv("start getFavorites. useragent {0}.", userAgent);
+			return Response.ok(favoriteService.getAllFavorites()).build();
+
+		} catch (Exception e) {
+			LOG.error(String.format("Error in getUsers. Message %s", e.getMessage()), e);
+			return Response.serverError().build();
+		}
+	}
 
 	@GET
-	public Response getFavorites(@Context HttpHeaders headers) {
+	@Path("/users/{userId}/favourites")
+	public Response getFavoritesByUserId(@Context HttpHeaders headers, @PathParam("userId") String userId) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
 			LOG.info(String.format("start getFavorites. useragent %s", userAgent));
@@ -41,13 +56,18 @@ public class FavoriteController {
 		}
 	}
 
+
 	@POST
-	public Response createFavourite(@Context HttpHeaders headers, FavoriteDto favourite) {
+	@Path("/users/{userId}/favourites")
+	public Response createFavourite(@Context HttpHeaders headers, @PathParam("userId") String userId, FavoriteDto favourite) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
 			LOG.info(String.format("start getUsers. useragent %s", userAgent));
-			favoriteService.createFavorite(favourite);
-			return Response.ok().build();
+			UserDto userDto = userService.getUser(userId);
+			userDto.addFavorite(favourite);
+			userService.updateUser(userDto, userId);
+
+			return Response.noContent().build();
 		} catch (Exception e) {
 			LOG.error(String.format("Error in createFavourite. Message %s", e.getMessage()), e);
 			return Response.serverError().build();
@@ -55,12 +75,13 @@ public class FavoriteController {
 	}
 
 	@DELETE
-	public Response deleteFavourite(@Context HttpHeaders headers, @QueryParam("movieId") String movieId) {
+	@Path("/users/{userId}/favourites/{movieId}")
+	public Response deleteFavourite(@Context HttpHeaders headers,@PathParam("userId") String userId, @PathParam("movieId") String movieId) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
 			LOG.info(String.format("start getUsers. useragent %s", userAgent));
-			favoriteService.deleteFavoriteId(movieId, userId);
-			return Response.ok(String.format("deleted %s", movieId)).build();
+			favoriteService.deleteFavoriteByMovieId(userId, movieId);
+			return Response.noContent().build();
 		} catch (Exception e) {
 			LOG.error(String.format("Error in deleteFavourite. Message %s", e.getMessage()), e);
 			return Response.serverError().build();

@@ -1,22 +1,22 @@
 package org.muuvy.backend.persistence.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+@Getter
+@Setter
 @Entity
-@NamedQuery(name = "User.findAll", query = "SELECT t FROM User t")
 @NoArgsConstructor
-@Table(name = "User")
+@AllArgsConstructor
+@NamedQuery(name = "User.findAll", query = "SELECT t FROM User t")
 public class User {
 
 	@Id
@@ -26,38 +26,6 @@ public class User {
 	private String fullName;
 	private String apiKey;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Favorite> favorites;
-
-	public String getApiKey() {
-		return apiKey;
-	}
-
-	public void setApiKey(String apiKey) {
-		this.apiKey = apiKey;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public Set<Favorite> getFavorites() {
-		return favorites;
-	}
-
-	public void setFavorites(Set<Favorite> favorites) {
-		this.favorites = favorites;
-	}
 }
