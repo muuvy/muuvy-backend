@@ -2,12 +2,13 @@ thorntail:
   http:
     port: 8888
   logging:
+    enabled: true
     pattern-formatters:
       DEFAULT:
         pattern: '%d %-5p [%t] %c: %m%n'
     console-handlers:
       CONSOLE:
-        level: INFO
+        level: DEBUG
         named-formatter: DEFAULT
     periodic-rotating-file-handlers:
       FILE:

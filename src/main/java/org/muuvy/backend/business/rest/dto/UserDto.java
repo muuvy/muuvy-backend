@@ -2,46 +2,38 @@ package org.muuvy.backend.business.rest.dto;
 
 import java.util.Set;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.muuvy.backend.persistence.models.User;
 
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class UserDto {
+
 	private String id;
+
+	@NonNull
 	private String fullName;
 	private String apiKey;
+
 	private Set<FavoriteDto> favorites;
 
-	public String getId() {
-		return id;
+	public UserDto(User user) {
+		this.fullName = user.getFullName();
+		this.id = user.getId();
+		this.apiKey = user.getApiKey();
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public FavoriteDto addFavorite(FavoriteDto favoriteDto) {
+		favorites.add(favoriteDto);
+		return favoriteDto;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public void removeFavorite(FavoriteDto favoriteDto) {
+		favorites.remove(favoriteDto);
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
 
-	public String getApiKey() {
-		return apiKey;
-	}
-
-	public void setApiKey(String apiKey) {
-		this.apiKey = apiKey;
-	}
-
-	public Set<FavoriteDto> getFavorites() {
-		return favorites;
-	}
-
-	public void setFavorites(Set<FavoriteDto> favorites) {
-		this.favorites = favorites;
-	}
 }
