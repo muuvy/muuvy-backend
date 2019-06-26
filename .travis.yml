@@ -3,7 +3,7 @@ branches:
   only:
   - master
 jdk:
-  - oraclejdk11
+  - openjdk11
 addons:
   sonarcloud:
     organization: muuvy
