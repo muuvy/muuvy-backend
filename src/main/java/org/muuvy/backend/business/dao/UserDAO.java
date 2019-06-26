@@ -1,14 +1,12 @@
 package org.muuvy.backend.business.dao;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
+import org.jboss.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.muuvy.backend.persistence.EntityManagerProducer;
 import org.muuvy.backend.persistence.models.User;
@@ -18,6 +16,8 @@ public class UserDAO {
 
 	@Inject
 	private EntityManagerProducer emProducer;
+
+	private static final Logger LOG = Logger.getLogger(UserDAO.class);
 
 	public List<User> getAll() {
 		EntityManager em = emProducer.createEntityManager();
@@ -29,23 +29,12 @@ public class UserDAO {
 		return em.find(User.class, id);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<User> findByName(String name) {
-		List<User> users = new ArrayList<>();
+	public Optional<User> findByName(String name) {
 		EntityManager em = emProducer.createEntityManager();
-		List results=  em.
-				createQuery("SELECT c FROM User c WHERE c.fullName = : fullName")
-				.setParameter("fullName", name)
-				.setMaxResults(10)
-				.getResultList();
-
-		Iterator iter = results.iterator();
-		while (iter.hasNext())
-		{
-			users.add((User)iter.next());
-		}
-
-		return users;
+		String query = "{ $query : { fullName : '" + name + "' } }";
+		LOG.info(String.format("findByName: query %s", query));
+		User user = (User) em.createNativeQuery(query, User.class).getSingleResult();
+		return Optional.of(user);
 	}
 
 	public void update(User user) {
