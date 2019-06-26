@@ -3,7 +3,6 @@ package org.muuvy.backend.business.dao;
 import java.util.List;
 import java.util.Optional;
 
-import org.jboss.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -17,8 +16,6 @@ public class UserDAO {
 
 	@Inject
 	private EntityManagerProducer emProducer;
-
-	private static final Logger LOG = Logger.getLogger(UserDAO.class);
 
 	public List<User> getAll() {
 		EntityManager em = emProducer.createEntityManager();
