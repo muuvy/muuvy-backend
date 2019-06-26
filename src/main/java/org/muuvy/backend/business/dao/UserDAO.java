@@ -7,6 +7,7 @@ import org.jboss.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import org.muuvy.backend.persistence.EntityManagerProducer;
 import org.muuvy.backend.persistence.models.User;
@@ -32,9 +33,13 @@ public class UserDAO {
 	public Optional<User> findByName(String name) {
 		EntityManager em = emProducer.createEntityManager();
 		String query = "{ $query : { fullName : '" + name + "' } }";
-		LOG.info(String.format("findByName: query %s", query));
-		User user = (User) em.createNativeQuery(query, User.class).getSingleResult();
-		return Optional.of(user);
+		try{
+			User user = (User) em.createNativeQuery(query, User.class).getSingleResult();
+			return Optional.of(user);
+		}
+		catch(NoResultException noResEx){
+			return Optional.empty();
+		}
 	}
 
 	public void update(User user) {
