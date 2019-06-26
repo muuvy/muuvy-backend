@@ -6,8 +6,6 @@ import org.muuvy.backend.business.rest.FavoriteController;
 import org.muuvy.backend.business.rest.dto.FavoriteDto;
 import org.muuvy.backend.business.rest.dto.UserDto;
 import org.muuvy.backend.persistence.models.Favorite;
-import org.muuvy.backend.persistence.models.User;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.ArrayList;

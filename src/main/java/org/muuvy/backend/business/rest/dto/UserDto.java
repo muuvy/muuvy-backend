@@ -34,6 +34,4 @@ public class UserDto {
 	public void removeFavorite(FavoriteDto favoriteDto) {
 		favorites.remove(favoriteDto);
 	}
-
-
 }

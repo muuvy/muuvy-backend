@@ -1,21 +1,21 @@
 package org.muuvy.backend.business.services;
 
-import org.jboss.logging.Logger;
-import org.muuvy.backend.business.dao.UserDAO;
-import org.muuvy.backend.business.rest.dto.UserDto;
-import org.muuvy.backend.business.rest.dto.FavoriteDto;
-import org.muuvy.backend.persistence.models.Favorite;
-import org.muuvy.backend.persistence.models.User;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+import org.jboss.logging.Logger;
+import org.muuvy.backend.business.dao.UserDAO;
+import org.muuvy.backend.business.rest.dto.FavoriteDto;
+import org.muuvy.backend.business.rest.dto.UserDto;
+import org.muuvy.backend.persistence.models.Favorite;
+import org.muuvy.backend.persistence.models.User;
 
 @ApplicationScoped
 public class UserService {
@@ -37,12 +37,11 @@ public class UserService {
 	public UserDto login(UserDto userDto) {
 
 		// Check if the user exists
-		List<User> usersFound;
-		usersFound = userDAO.findByName(userDto.getFullName());
+		Optional<User> userOptional = userDAO.findByName(userDto.getFullName());
 
-		if (usersFound.size() > 0) {
+		if (userOptional.isPresent()) {
 			// take the first found user
-			User u = usersFound.get(0);
+			User u = userOptional.get();
 			return new UserDto(u);
 		} else {
 			User user = new User();
@@ -71,24 +70,22 @@ public class UserService {
 
 	public List<UserDto> getUsersByName(String userName) {
 
-		List<User> users = userDAO.findByName(userName);
-		List<UserDto> userDtos = new ArrayList<>();
+		Optional<User> optionalUser = userDAO.findByName(userName);
 
-		if (users.size() > 0) {
-			for (User user : users) {
-				userDtos.add(new UserDto(user));
-			}
+		List<UserDto> users = new ArrayList<UserDto>();
+
+		if (optionalUser.isPresent()) {
+			users.add(new UserDto(optionalUser.get()));
 		}
-
-		return userDtos;
+		return users;
 	}
 
 	public List<UserDto> getUsers() {
 		List<User> users = userDAO.getAll();
 		List<UserDto> userDtos = new ArrayList<UserDto>();
 		for (User user : users) {
-			Set<FavoriteDto> favorites = user.getFavorites().stream().map(f -> new FavoriteDto(f.getId(), f.getMovieId()))
-					.collect(Collectors.toSet());
+			Set<FavoriteDto> favorites = user.getFavorites().stream()
+					.map(f -> new FavoriteDto(f.getId(), f.getMovieId())).collect(Collectors.toSet());
 			UserDto userDto = new UserDto(user.getId(), user.getFullName(), user.getApiKey(), favorites);
 			userDtos.add(userDto);
 		}
@@ -99,7 +96,7 @@ public class UserService {
 
 		Set<Favorite> favorites = new HashSet<>();
 
-		for(FavoriteDto fd : userDto.getFavorites()) {
+		for (FavoriteDto fd : userDto.getFavorites()) {
 			favorites.add(new Favorite(fd.getId(), fd.getMovieId()));
 		}
 
