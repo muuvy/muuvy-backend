@@ -7,14 +7,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class FavoriteServiceTest {
 
     @Test
-    void createFavourite() {
+    void createFavorite() {
     }
 
     @Test
-    void deleteFavouriteId() {
+    void deleteFavoriteId() {
     }
 
     @Test
-    void getFavoutire() {
+    void getFavorite() {
     }
 }

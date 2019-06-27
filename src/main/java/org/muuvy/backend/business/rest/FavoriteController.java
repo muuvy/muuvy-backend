@@ -38,7 +38,7 @@ public class FavoriteController {
 	}
 
 	@POST
-	public Response createFavourite(@Context HttpHeaders headers, FavoriteDto favourite) {
+	public Response createFavorite(@Context HttpHeaders headers, FavoriteDto favourite) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
 			LOG.info(String.format("start getUsers. useragent %s", userAgent));
@@ -51,7 +51,7 @@ public class FavoriteController {
 	}
 
 	@DELETE
-	public Response deleteFavourite(@Context HttpHeaders headers, @QueryParam("movieId") String movieId) {
+	public Response deleteFavorite(@Context HttpHeaders headers, @QueryParam("movieId") String movieId) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
 			LOG.info(String.format("start getUsers. useragent %s", userAgent));
