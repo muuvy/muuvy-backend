@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo /usr/bin/java -jar target/muuvy-backend-1.0.0-thorntail.jar

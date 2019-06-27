@@ -1,6 +1,8 @@
 package org.muuvy.backend.business.dao;
 
 import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -45,7 +47,6 @@ public class UserDAO {
 		} else {
 			return null;
 		}
-
 	}
 
 	public void update(User user) {

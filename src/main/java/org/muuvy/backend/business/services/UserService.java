@@ -11,7 +11,22 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+import org.jboss.logging.Logger;
+import org.muuvy.backend.business.dao.UserDAO;
+import org.muuvy.backend.business.rest.dto.FavoriteDto;
+import org.muuvy.backend.business.rest.dto.UserDto;
+import org.muuvy.backend.persistence.models.Favorite;
+import org.muuvy.backend.persistence.models.User;
 
 @ApplicationScoped
 public class UserService {
@@ -93,7 +108,6 @@ public class UserService {
 	}
 
 	public UserDto getUsersByName(String userName) {
-
 		User user = userDAO.findByName(userName);
 
 		if (user != null) {
@@ -107,8 +121,8 @@ public class UserService {
 		List<User> users = userDAO.getAll();
 		List<UserDto> userDtos = new ArrayList<UserDto>();
 		for (User user : users) {
-			Set<FavoriteDto> favorites = user.getFavorites().stream().map(f -> new FavoriteDto(f.getId(), f.getMovieId()))
-					.collect(Collectors.toSet());
+			Set<FavoriteDto> favorites = user.getFavorites().stream()
+					.map(f -> new FavoriteDto(f.getId(), f.getMovieId())).collect(Collectors.toSet());
 			UserDto userDto = new UserDto(user.getId(), user.getFullName(), user.getApiKey(), favorites);
 			userDtos.add(userDto);
 		}
@@ -118,6 +132,7 @@ public class UserService {
 	public UserDto updateUser(UserDto userDto, String userId) {
 
 		Set<Favorite> favorites = new HashSet<>();
+
 
 		LOG.infov("Update the user including favorites count {0}", userDto.toString());
 

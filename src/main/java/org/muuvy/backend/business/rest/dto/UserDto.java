@@ -81,4 +81,5 @@ public class UserDto {
 				", favorites=" + favorites +
 				'}';
 	}
+
 }
