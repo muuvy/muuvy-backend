@@ -1,5 +1,16 @@
 package org.muuvy.backend.business.services;
 
+import org.jboss.logging.Logger;
+import org.muuvy.backend.business.dao.UserDAO;
+import org.muuvy.backend.business.rest.dto.UserDto;
+import org.muuvy.backend.business.rest.dto.FavoriteDto;
+import org.muuvy.backend.persistence.models.Favorite;
+import org.muuvy.backend.persistence.models.User;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+import java.util.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,22 +38,44 @@ public class UserService {
 	private UserDAO userDAO;
 
 	public UserDto createUser(UserDto userDto) {
-		User user = new User();
-		user.setFullName(userDto.getFullName());
-		user.setApiKey(API_KEY);
-		user.setFavorites(new HashSet<>());
-		return new UserDto(userDAO.create(user));
+
+		// Check if the user already exists
+		if (!userExists(userDto.getFullName())) {
+
+			User user = new User();
+
+			user.setFullName(userDto.getFullName());
+			user.setApiKey(API_KEY);
+
+			if (userDto.getFavorites() != null && userDto.getFavorites().size() > 0) {
+				Set<Favorite> favorites = new HashSet<>();
+				for (FavoriteDto favoriteDto : userDto.getFavorites()) {
+					favorites.add(new Favorite(favoriteDto.getId(), favoriteDto.getMovieId()));
+				}
+				user.setFavorites(favorites);
+
+			} else {
+				user.setFavorites(new HashSet<>());
+			}
+
+			// create new user
+			return new UserDto(userDAO.create(user));
+
+		} else {
+
+			// return existing user
+			return new UserDto(userDAO.findByName(userDto.getFullName()));
+		}
 	}
 
 	public UserDto login(UserDto userDto) {
-
 		// Check if the user exists
-		Optional<User> userOptional = userDAO.findByName(userDto.getFullName());
+		User userFound = userDAO.findByName(userDto.getFullName());
+		LOG.infov("found {0} users in database for {1}", userFound, userDto.getFullName());
 
-		if (userOptional.isPresent()) {
+		if (userFound != null) {
 			// take the first found user
-			User u = userOptional.get();
-			return new UserDto(u);
+			return new UserDto(userFound);
 		} else {
 			User user = new User();
 			user.setFullName(userDto.getFullName());
@@ -53,31 +86,35 @@ public class UserService {
 	}
 
 	public void deleteById(String id) {
-		User getUser = userDAO.findById(id);
-		userDAO.delete(getUser);
+		Optional<User> user = userDAO.findById(id);
+		user.ifPresent(value -> userDAO.delete(value));
 	}
 
 	public UserDto getUser(String userId) {
 
-		User user = userDAO.findById(userId);
+		Optional<User> user = userDAO.findById(userId);
 		LOG.debugv("Get one user by its id {} was {}", userId, user);
 
-		Set<FavoriteDto> favorites = user.getFavorites().stream().map(f -> new FavoriteDto(f.getId(), f.getMovieId()))
-				.collect(Collectors.toSet());
+		if (user.isPresent()) {
+			Set<FavoriteDto> favorites = user.get().getFavorites().stream().map(f -> new FavoriteDto(f.getId(),
+					f.getMovieId()))
+					.collect(Collectors.toSet());
+			return new UserDto(user.get(), favorites);
+		} else {
+			// TODO: Implement Error Handling
+			return null;
+		}
 
-		return new UserDto(user.getId(), user.getFullName(), user.getApiKey(), favorites);
 	}
 
-	public List<UserDto> getUsersByName(String userName) {
+	public UserDto getUsersByName(String userName) {
+		User user = userDAO.findByName(userName);
 
-		Optional<User> optionalUser = userDAO.findByName(userName);
-
-		List<UserDto> users = new ArrayList<UserDto>();
-
-		if (optionalUser.isPresent()) {
-			users.add(new UserDto(optionalUser.get()));
+		if (user != null) {
+			return new UserDto(user);
+		} else {
+			return null;
 		}
-		return users;
 	}
 
 	public List<UserDto> getUsers() {
@@ -96,14 +133,21 @@ public class UserService {
 
 		Set<Favorite> favorites = new HashSet<>();
 
-		for (FavoriteDto fd : userDto.getFavorites()) {
+
+		LOG.infov("Update the user including favorites count {0}", userDto.toString());
+
+		for(FavoriteDto fd : userDto.getFavorites()) {
 			favorites.add(new Favorite(fd.getId(), fd.getMovieId()));
 		}
 
-		User user = new User(userDto.getId(), userDto.getFullName(), userDto.getApiKey(), favorites);
-
+		User user = new User(userId, userDto.getFullName(), userDto.getApiKey(), favorites);
 		userDAO.update(user);
 
 		return userDto;
+	}
+
+	public Boolean userExists(String fullName) {
+		User user = userDAO.findByName(fullName);
+		return user != null;
 	}
 }

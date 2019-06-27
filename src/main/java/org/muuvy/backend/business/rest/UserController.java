@@ -54,7 +54,7 @@ public class UserController {
 	public Response searchUserByName(@Context HttpHeaders headers, @PathParam("userName") String userName) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
-			LOG.info(String.format("start search users. useragent %s", userAgent));
+			LOG.infov("start search users. useragent %s", userAgent);
 			return Response.ok(userService.getUsersByName(userName)).build();
 		} catch (Exception e) {
 			LOG.error(String.format("Error in getUsers. Message %s", e.getMessage()), e);
@@ -82,11 +82,10 @@ public class UserController {
 	public Response createUser(@Context HttpHeaders headers, UserDto user) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
-			LOG.info(String.format("start createUser. useragent %s", userAgent));
-			userService.createUser(user);
-			return Response.ok().build();
+			LOG.infov("start createUser. useragent {0}", userAgent);
+			return Response.ok(userService.createUser(user)).build();
 		} catch (Exception e) {
-			LOG.error(String.format("Error in createUser. Message %s", e.getMessage()), e);
+			LOG.errorv("Error in createUser. Message {0}", e.getMessage(), e);
 			return Response.serverError().build();
 		}
 	}

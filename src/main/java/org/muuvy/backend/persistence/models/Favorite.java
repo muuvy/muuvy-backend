@@ -5,17 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.muuvy.backend.business.rest.dto.FavoriteDto;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @NamedQuery(name = "Favorite.findAll", query = "SELECT t FROM Favorite t")
 public class Favorite {
@@ -24,6 +22,15 @@ public class Favorite {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
+
+	@NonNull
 	private String movieId;
 
+	@Override
+	public String toString() {
+		return "Favorite{" +
+				"id='" + id + '\'' +
+				", movieId='" + movieId + '\'' +
+				'}';
+	}
 }

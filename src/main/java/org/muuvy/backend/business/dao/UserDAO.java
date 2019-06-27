@@ -1,18 +1,21 @@
 package org.muuvy.backend.business.dao;
 
+import java.util.*;
 import java.util.List;
 import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-
+import javax.persistence.Query;
+import org.jboss.logging.Logger;
 import org.muuvy.backend.persistence.EntityManagerProducer;
 import org.muuvy.backend.persistence.models.User;
 
 @ApplicationScoped
 public class UserDAO {
+
+	private static final Logger LOG = Logger.getLogger(UserDAO.class);
 
 	@Inject
 	private EntityManagerProducer emProducer;
@@ -22,24 +25,32 @@ public class UserDAO {
 		return em.createNamedQuery("User.findAll", User.class).getResultList();
 	}
 
-	public User findById(String id) {
+	public Optional<User> findById(String id) {
 		EntityManager em = emProducer.createEntityManager();
-		return em.find(User.class, id);
+		User user = em.find(User.class, id);
+		return Optional.of(user);
 	}
 
-	public Optional<User> findByName(String name) {
+	public User findByName(String name) {
+
 		EntityManager em = emProducer.createEntityManager();
-		String query = "{ $query : { fullName : '" + name + "' } }";
-		try{
-			User user = (User) em.createNativeQuery(query, User.class).getSingleResult();
-			return Optional.of(user);
-		}
-		catch(NoResultException noResEx){
-			return Optional.empty();
+
+		Query query = em.createQuery("SELECT c FROM User c where fullName = :fullName", User.class);
+		query.setMaxResults(1);
+		query.setParameter("fullName", name);
+		List results = query.getResultList();
+
+		LOG.infov("found {0} for username {1}", results, name);
+
+		if (results != null && results.size() > 0) {
+			return (User) results.get(0);
+		} else {
+			return null;
 		}
 	}
 
 	public void update(User user) {
+		LOG.infov("try to merge user {0}", user.toString());
 		EntityManager em = emProducer.createEntityManager();
 		em.getTransaction().begin();
 		em.merge(user);
@@ -60,4 +71,5 @@ public class UserDAO {
 		em.remove(user);
 		em.getTransaction().commit();
 	}
+
 }
