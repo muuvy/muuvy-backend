@@ -39,18 +39,23 @@ Verify if the server is up and running, by visit this http://localhost:8888/api/
 - POST /api/users
 - DELETE /api/users
 - GET /api/users/{userId}
-- GET /api/users/{userId}/favourites
+- GET /api/users/{`userId}/favourites
 - POST /api/users/{userId}/favourites
 - DELETE /api/users/{userId}/favourites
 - GET /api/users/search/{userName}
 - POST /api/login
 
+## Run the Project w`ith IntelliJ
+
+Start Options -> Edit Configuration -> Add Application -> Set Main class to
+`org.muuvy.backend.RestServiceTest`
 
 ## Configuration
 
 All thorntail configurations are located in `src/main/resources/project-defaults.yml`. Each environment has its own config file.
 
 ### Prometheus
+
 - Prometheus: copy the file and put this inside the extracted file: https://github.com/muuvy/docs/tree/master/prometheus
 - Run prometheus.exe and you can call this URL: localhost:9090
 - more information here: https://github.com/muuvy/muuvy-backend/issues/8
