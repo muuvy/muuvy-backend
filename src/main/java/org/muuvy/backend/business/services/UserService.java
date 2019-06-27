@@ -24,7 +24,7 @@ public class UserService {
 	private static final Logger LOG = Logger.getLogger(UserService.class);
 
 	@Inject
-	private UserDAO userDAO;
+	UserDAO userDAO;
 
 	public UserDto createUser(UserDto userDto) {
 
