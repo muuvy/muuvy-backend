@@ -10,5 +10,4 @@ class UserTest {
         User user = new User();
         assertNotNull(user);
     }
-
 }

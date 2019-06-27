@@ -39,13 +39,13 @@ Verify if the server is up and running, by visit this http://localhost:8888/api/
 - POST /api/users
 - DELETE /api/users
 - GET /api/users/{userId}
-- GET /api/users/{`userId}/favourites
+- GET /api/users/{userId}/favourites
 - POST /api/users/{userId}/favourites
 - DELETE /api/users/{userId}/favourites
 - GET /api/users/search/{userName}
 - POST /api/login
 
-## Run the Project w`ith IntelliJ
+## Run the Project with IntelliJ
 
 Start Options -> Edit Configuration -> Add Application -> Set Main class to
 `org.muuvy.backend.RestServiceTest`
