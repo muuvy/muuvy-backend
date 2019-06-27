@@ -5,13 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.muuvy.backend.business.rest.dto.FavoriteDto;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Setter
