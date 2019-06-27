@@ -3,7 +3,6 @@ package org.muuvy.backend.business.services;
 import org.jboss.logging.Logger;
 import org.muuvy.backend.business.dao.FavoriteDAO;
 import org.muuvy.backend.business.dao.UserDAO;
-import org.muuvy.backend.business.rest.FavoriteController;
 import org.muuvy.backend.business.rest.dto.FavoriteDto;
 import org.muuvy.backend.business.rest.dto.UserDto;
 import org.muuvy.backend.persistence.models.Favorite;
@@ -27,7 +26,7 @@ public class FavoriteService {
 	@Inject
 	private UserService userService;
 
-	private static final Logger LOG = Logger.getLogger(FavoriteController.class);
+	private static final Logger LOG = Logger.getLogger(FavoriteService.class);
 
 
 	public List<FavoriteDto> getAllFavorites() {
