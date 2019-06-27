@@ -85,34 +85,27 @@
             <groupId>io.thorntail</groupId>
             <artifactId>jaxrs</artifactId>
         </dependency>
+
         <dependency>
             <groupId>io.thorntail</groupId>
             <artifactId>microprofile-metrics</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.thorntail</groupId>
+            <artifactId>microprofile-health</artifactId>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/io.thorntail/cdi -->
         <dependency>
             <groupId>io.thorntail</groupId>
             <artifactId>cdi</artifactId>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/io.thorntail/logging -->
         <dependency>
             <groupId>io.thorntail</groupId>
             <artifactId>logging</artifactId>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
-        <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>7.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -121,13 +114,6 @@
             <artifactId>lombok</artifactId>
             <version>1.18.8</version>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
-            <version>3.4.0.Final</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate.ogm/hibernate-ogm-mongodb -->
@@ -142,6 +128,13 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver</artifactId>
             <version>3.10.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>7.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->

@@ -2,22 +2,17 @@ thorntail:
   http:
     port: 8888
   logging:
-    enabled: true
     pattern-formatters:
-      DEFAULT:
+      default:
         pattern: '%d %-5p [%t] %c: %m%n'
+    root-logger:
+      level: INFO
+      handlers:
+        - CONSOLE
     console-handlers:
       CONSOLE:
         level: DEBUG
-        named-formatter: DEFAULT
-    periodic-rotating-file-handlers:
-      FILE:
-        level: ERROR
-        file:
-          path: log/error.log
-        named-formatter: DEFAULT
-        suffix: yyyy-MM-dd
-    root-logger:
-      handlers:
-        - CONSOLE
-        - FILE
+        named-formatter: default
+    loggers:
+      org.muuvy.backend:
+        level: DEBUG
