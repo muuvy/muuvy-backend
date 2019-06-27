@@ -10,23 +10,12 @@ import org.muuvy.backend.persistence.models.User;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import java.util.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
-import org.jboss.logging.Logger;
-import org.muuvy.backend.business.dao.UserDAO;
-import org.muuvy.backend.business.rest.dto.FavoriteDto;
-import org.muuvy.backend.business.rest.dto.UserDto;
-import org.muuvy.backend.persistence.models.Favorite;
-import org.muuvy.backend.persistence.models.User;
 
 @ApplicationScoped
 public class UserService {
@@ -93,7 +82,7 @@ public class UserService {
 	public UserDto getUser(String userId) {
 
 		Optional<User> user = userDAO.findById(userId);
-		LOG.debugv("Get one user by its id {} was {}", userId, user);
+		LOG.debugv("Get one user by its id {0} was {1}", userId, user);
 
 		if (user.isPresent()) {
 			Set<FavoriteDto> favorites = user.get().getFavorites().stream().map(f -> new FavoriteDto(f.getId(),
@@ -132,8 +121,6 @@ public class UserService {
 	public UserDto updateUser(UserDto userDto, String userId) {
 
 		Set<Favorite> favorites = new HashSet<>();
-
-
 		LOG.infov("Update the user including favorites count {0}", userDto.toString());
 
 		for(FavoriteDto fd : userDto.getFavorites()) {

@@ -11,7 +11,7 @@ import org.eclipse.microprofile.metrics.annotation.Gauge;
 import org.eclipse.microprofile.metrics.annotation.Metered;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
-@Path("/health")
+@Path("/status")
 @Produces("application/json")
 @ApplicationScoped
 public class MetricController {

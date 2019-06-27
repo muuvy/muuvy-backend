@@ -35,11 +35,11 @@ public class FavoriteController {
 	public Response getFavoritesByUserId(@Context HttpHeaders headers, @PathParam("userId") String userId) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
-			LOG.info(String.format("start getFavorites. useragent %s", userAgent));
+			LOG.infov("start getFavorites. useragent {0}", userAgent);
 			UserDto user = userService.getUser(userId);
 			return Response.ok(user.getFavorites()).build();
 		} catch (Exception e) {
-			LOG.error(String.format("Error in getUsers. Message %s", e.getMessage()), e);
+			LOG.errorv("Error in getUsers. Message {0}", e.getMessage(), e);
 			return Response.serverError().build();
 		}
 	}
@@ -78,7 +78,7 @@ public class FavoriteController {
 			}
 
 		} catch (Exception e) {
-			LOG.error(String.format("Error in createFavourite. Message %s", e.getMessage()), e);
+			LOG.error("Error in createFavourite. Message {0}", e.getMessage(), e);
 			return Response.serverError().build();
 		}
 	}
@@ -92,7 +92,7 @@ public class FavoriteController {
 			favoriteService.deleteFavoriteByMovieId(userId, movieId);
 			return Response.noContent().build();
 		} catch (Exception e) {
-			LOG.error(String.format("Error in deleteFavourite. Message %s", e.getMessage()), e);
+			LOG.errorv("Error in deleteFavourite. Message {0}", e.getMessage(), e);
 			return Response.serverError().build();
 		}
 	}
