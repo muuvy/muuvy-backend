@@ -1,7 +1,6 @@
 package org.muuvy.backend.business.services;
 
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -72,6 +71,4 @@ public class UserServiceIT {
         assertEquals(userService.getUsers().size(), users.size());
 
     }
-
-
 }
