@@ -13,38 +13,27 @@ import org.muuvy.backend.persistence.models.User;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
-public class UserServiceTest {
-
- @Mock
- private static EntityManager entityManager;
-
- @Mock
- private static Query query;
-
- @Mock
- private static User  user;
- private static UserDAO userDAO;
-
- @Mock
- private static UserDto userDto;
+public class UserServiceUT {
 
     @Test
     void createUser() {
-     user = new User();
+     User user = new User();
      assertNotNull(user);
     }
 
     @Test
     void deleteById() {
-        user = new User();
-
+        User user = new User();
+        user = null;
+        assertNull(user);
     }
 
     @Test
-    void getUser() {
-
+    void userToStringNotEmpty() {
+        User user = new User();
+        assertNotEquals("", user.toString());
     }
 }
