@@ -2,6 +2,7 @@ package org.muuvy.backend.business.services;
 
 import org.jboss.logging.Logger;
 import org.muuvy.backend.business.dao.FavoriteDAO;
+import org.muuvy.backend.business.dao.UserDAO;
 import org.muuvy.backend.business.rest.FavoriteController;
 import org.muuvy.backend.business.rest.dto.FavoriteDto;
 import org.muuvy.backend.business.rest.dto.UserDto;
@@ -19,6 +20,9 @@ public class FavoriteService {
 
 	@Inject
 	private FavoriteDAO favoriteDAO;
+
+	@Inject
+	private UserDAO userDAO;
 
 	@Inject
 	private UserService userService;
@@ -42,23 +46,25 @@ public class FavoriteService {
 
 		UserDto user = userService.getUser(userId);
 		List<FavoriteDto> favoriteDtos = new ArrayList<>();
-
 		user.getFavorites().forEach(fav -> favoriteDtos.add(new FavoriteDto(fav.getId(), fav.getMovieId())));
-
 		return favoriteDtos;
 	}
 
-	@Deprecated
-	public void createFavorite(FavoriteDto favoriteDto) {
-		Favorite favorite = new Favorite(favoriteDto.getId(), favoriteDto.getMovieId());
-		favoriteDAO.create(favorite);
-	}
 
-	// TODO: Fix delete function
 	public void deleteFavoriteByMovieId(String userId, String movieId) {
-		List<Favorite> favorites = favoriteDAO.getAll();
-		Optional<Favorite> favorite = favorites.stream()
-				.filter(fM -> fM.getId().equals(movieId) && fM.getId().equals(movieId)).findFirst();
-		favorite.ifPresent(value -> favoriteDAO.delete(value));
+		LOG.infov("remove fav {0} from user {1}", movieId, userId);
+		Optional<User> user = userDAO.findById(userId);
+
+		if (user.isPresent()) {
+			Favorite favToDelete = user.get().getFavourite(movieId);
+			user.get().removeFavorite(movieId);
+			userDAO.update(user.get());
+			LOG.infov("updated delete changes on user");
+
+			LOG.infov("removed fav from user object {0}", user.toString());
+			favoriteDAO.delete(favToDelete);
+			LOG.infov("removed fav from database");
+		}
+
 	}
 }
