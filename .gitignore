@@ -208,3 +208,5 @@ resources/templates/css/**
 resources/templates/js/**
 resources/templates/fonts/**
 dist
+
+log/

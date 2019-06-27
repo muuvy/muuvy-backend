@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.muuvy.backend</groupId>
     <artifactId>muuvy-backend</artifactId>
     <name>muuvy-backend</name>
     <packaging>war</packaging>
     <version>1.0.0</version>
-    
+
     <properties>
+        <version.wildfly.maven.plugin>2.0.0.Final</version.wildfly.maven.plugin>
         <version.thorntail>2.4.0.Final</version.thorntail>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -25,20 +27,21 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
-    
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${version.wildfly.maven.plugin}</version>
+            </plugin>
             <plugin>
                 <groupId>io.thorntail</groupId>
                 <artifactId>thorntail-maven-plugin</artifactId>
                 <version>${version.thorntail}</version>
-                <configuration>
-                    <argLine>
-                        --illegal-access=permit
-                    </argLine>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -82,6 +85,10 @@
             <groupId>io.thorntail</groupId>
             <artifactId>jaxrs</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.thorntail</groupId>
+            <artifactId>microprofile-metrics</artifactId>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/io.thorntail/cdi -->
         <dependency>
             <groupId>io.thorntail</groupId>
@@ -92,7 +99,7 @@
             <groupId>io.thorntail</groupId>
             <artifactId>logging</artifactId>
         </dependency>
-        
+
         <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
         <dependency>
             <groupId>javax</groupId>
@@ -100,7 +107,14 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-        
+
+        <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>7.1</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -108,28 +122,28 @@
             <version>1.18.8</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
         <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
             <version>3.4.0.Final</version>
         </dependency>
-        
+
         <!-- https://mvnrepository.com/artifact/org.hibernate.ogm/hibernate-ogm-mongodb -->
         <dependency>
             <groupId>org.hibernate.ogm</groupId>
             <artifactId>hibernate-ogm-mongodb</artifactId>
-            <version>5.0.0.Final</version>
+            <version>5.4.1.Final</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver -->
         <dependency>
             <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>3.8.0</version>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.10.2</version>
         </dependency>
-        
+
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

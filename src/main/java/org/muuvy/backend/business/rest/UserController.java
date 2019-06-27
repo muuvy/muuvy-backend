@@ -11,7 +11,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 
-@Path("/user")
+@Path("/")
 @Produces("application/json")
 @ApplicationScoped
 public class UserController {
@@ -21,7 +21,23 @@ public class UserController {
 	@Inject
 	private UserService userService;
 
+
+	@POST
+	@Path("/login")
+	public Response loginUser(@Context HttpHeaders headers, UserDto user) {
+		try {
+			String userAgent = headers.getRequestHeader("user-agent").get(0);
+			LOG.info(String.format("start createUser. useragent %s", userAgent));
+			return Response.ok(userService.login(user)).build();
+		} catch (Exception e) {
+			LOG.error(String.format("Error in createUser. Message %s", e.getMessage()), e);
+			return Response.serverError().build();
+		}
+	}
+
+
 	@GET
+	@Path("/users")
 	public Response getUsers(@Context HttpHeaders headers) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
@@ -33,7 +49,36 @@ public class UserController {
 		}
 	}
 
+	@GET
+	@Path("/users/search/{userName}")
+	public Response searchUserByName(@Context HttpHeaders headers, @PathParam("userName") String userName) {
+		try {
+			String userAgent = headers.getRequestHeader("user-agent").get(0);
+			LOG.info(String.format("start search users. useragent %s", userAgent));
+			return Response.ok(userService.getUsersByName(userName)).build();
+		} catch (Exception e) {
+			LOG.error(String.format("Error in getUsers. Message %s", e.getMessage()), e);
+			return Response.serverError().build();
+		}
+	}
+
+
+	@GET
+	@Path("/users/{userId}")
+	public Response getUser(@Context HttpHeaders headers, @PathParam("userId") String userId) {
+		try {
+			String userAgent = headers.getRequestHeader("user-agent").get(0);
+			LOG.info(String.format("start getUser. useragent %s", userAgent));
+			return Response.ok(userService.getUser(userId)).build();
+		} catch (Exception e) {
+			LOG.error(String.format("Error in getUsers. Message %s", e.getMessage()), e);
+			return Response.serverError().build();
+		}
+	}
+
+
 	@POST
+	@Path("/users")
 	public Response createUser(@Context HttpHeaders headers, UserDto user) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
@@ -46,8 +91,10 @@ public class UserController {
 		}
 	}
 
+
 	@DELETE
-	public Response deleteUser(@Context HttpHeaders headers, @QueryParam("userId") String userId) {
+	@Path("/users/{userId}")
+	public Response deleteUser(@Context HttpHeaders headers, @PathParam("userId") String userId) {
 		try {
 			String userAgent = headers.getRequestHeader("user-agent").get(0);
 			LOG.info(String.format("start deleteUser. useragent %s", userAgent));

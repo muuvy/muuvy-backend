@@ -2,13 +2,13 @@ package org.muuvy.backend.business.services;
 
 import org.muuvy.backend.business.dao.FavoriteDAO;
 import org.muuvy.backend.business.rest.dto.FavoriteDto;
+import org.muuvy.backend.business.rest.dto.UserDto;
 import org.muuvy.backend.persistence.models.Favorite;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class FavoriteService {
@@ -16,23 +16,42 @@ public class FavoriteService {
 	@Inject
 	private FavoriteDAO favoriteDAO;
 
+	@Inject
+	private UserService userService;
+
+	public List<FavoriteDto> getAllFavorites() {
+
+		List<Favorite> favorites = favoriteDAO.getAll();
+		List<FavoriteDto> favoriteDtos = new ArrayList<>();
+
+		for (Favorite favorite : favorites) {
+			FavoriteDto favoriteDto = new FavoriteDto(favorite.getId(), favorite.getMovieId());
+			favoriteDtos.add(favoriteDto);
+		}
+		return favoriteDtos;
+	}
+
+	public List<FavoriteDto> getAllFavoritesByUser(String userId) {
+
+		UserDto user = userService.getUser(userId);
+		List<FavoriteDto> favoriteDtos = new ArrayList<>();
+
+		user.getFavorites().forEach(fav -> favoriteDtos.add(new FavoriteDto(fav.getId(), fav.getMovieId())));
+
+		return favoriteDtos;
+	}
+
+	@Deprecated
 	public void createFavorite(FavoriteDto favoriteDto) {
-		Favorite favorite = new Favorite(favoriteDto.getId(), favoriteDto.getUserId());
+		Favorite favorite = new Favorite(favoriteDto.getId(), favoriteDto.getMovieId());
 		favoriteDAO.create(favorite);
 	}
 
-	public void deleteFavoriteId(String movieId, String userId) {
+	// TODO: Fix delete function
+	public void deleteFavoriteByMovieId(String userId, String movieId) {
 		List<Favorite> favorites = favoriteDAO.getAll();
 		Optional<Favorite> favorite = favorites.stream()
-				.filter(fM -> fM.getUserId().equals(userId) && fM.getId().equals(movieId)).findFirst();
-		if (favorite.isPresent()) {
-			favoriteDAO.delete(favorite.get());
-		}
-	}
-
-	public List<FavoriteDto> getFavoritesByUserId(String userId) {
-		List<Favorite> favorites = favoriteDAO.getAll();
-		return favorites.stream().filter(fM -> fM.getUserId().equals(userId))
-				.map(f -> new FavoriteDto(f.getId(), f.getUserId())).collect(Collectors.toList());
+				.filter(fM -> fM.getId().equals(movieId) && fM.getId().equals(movieId)).findFirst();
+		favorite.ifPresent(value -> favoriteDAO.delete(value));
 	}
 }
