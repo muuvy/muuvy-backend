@@ -41,7 +41,6 @@ public class FavoriteService {
 	}
 
 	public List<FavoriteDto> getAllFavoritesByUser(String userId) {
-
 		UserDto user = userService.getUser(userId);
 		List<FavoriteDto> favoriteDtos = new ArrayList<>();
 		user.getFavorites().forEach(fav -> favoriteDtos.add(new FavoriteDto(fav.getId(), fav.getMovieId())));
