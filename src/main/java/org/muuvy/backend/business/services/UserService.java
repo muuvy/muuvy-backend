@@ -47,8 +47,10 @@ public class UserService {
 				user.setFavorites(new HashSet<>());
 			}
 
+			User createdUser = userDAO.create(user);
+
 			// create new user
-			return new UserDto(userDAO.create(user));
+			return new UserDto(createdUser);
 
 		} else {
 
