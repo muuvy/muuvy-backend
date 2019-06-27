@@ -1,47 +1,40 @@
 package org.muuvy.backend.business.services;
 
 
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.muuvy.backend.business.dao.UserDAO;
-import org.muuvy.backend.business.rest.dto.FavoriteDto;
 import org.muuvy.backend.business.rest.dto.UserDto;
-import org.muuvy.backend.persistence.EntityManagerProducer;
 import org.muuvy.backend.persistence.models.Favorite;
 import org.muuvy.backend.persistence.models.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserServiceIT {
 
-    @Mock
-    private EntityManagerProducer emProd;
+    @InjectMocks
+    private UserService userService;
 
     @Mock
     private UserDAO userDAO;
 
-    @Mock
-    private UserService userService;
-
     @BeforeEach
     void setUp() {
-
-        userService = new UserService();
-        emProd = new EntityManagerProducer();
-        userDAO = new UserDAO();
-        userDAO.emProducer = emProd;
-        userService.userDAO = userDAO;
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void createUserInDb(){
+    public void testCreateUserInDb(){
         String userId = "1234";
 
         Set<Favorite> favorites = new HashSet();
@@ -50,16 +43,35 @@ public class UserServiceIT {
         favorites.add(new Favorite("movie3"));
         favorites.add(new Favorite("movie4"));
         UserDto user = new UserDto(new User(userId, "michi", "", favorites));
-        userService.createUser(user);
 
-        assertEquals(userService.getUser("userId").getId(), userId);
+        Mockito.when(userDAO.create(Mockito.any(User.class))).thenReturn(user.toModel());
+        Mockito.when(userDAO.findByName(user.getFullName())).thenReturn(null);
+
+        assertEquals(userService.createUser(user).getFullName(), user.getFullName());
+        assertEquals(userService.createUser(user).getFavorites().size(), user.getFavorites().size());
+
     }
 
     @Test
-     void getUsersFormDB(){
-        userService.getUsers();
+    public void testGetAllUsers(){
 
+        String userId = "1234";
+
+        Set<Favorite> favorites = new HashSet<>();
+        favorites.add(new Favorite("movie1"));
+        favorites.add(new Favorite("movie2"));
+
+        UserDto user = new UserDto(new User(userId, "michi", "", favorites));
+
+        List<User> users = new ArrayList<>();
+        users.add(user.toModel());
+        users.add(user.toModel());
+
+        Mockito.when(userDAO.getAll()).thenReturn(users);
+
+        assertEquals(userService.getUsers().size(), users.size());
 
     }
+
 
 }

@@ -18,7 +18,7 @@ public class UserDAO {
 	private static final Logger LOG = Logger.getLogger(UserDAO.class);
 
 	@Inject
-	public EntityManagerProducer emProducer;
+	private EntityManagerProducer emProducer;
 
 	public List<User> getAll() {
 		EntityManager em = emProducer.createEntityManager();
